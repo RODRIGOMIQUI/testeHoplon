@@ -1,0 +1,8 @@
+.vs
+*.cache
+/ConsoleApp/bin/
+/ConsoleApp/obj/
+/Hoplon/bin/
+/Hoplon/obj/
+/UnitTest/bin/
+/UnitTest/obj/
