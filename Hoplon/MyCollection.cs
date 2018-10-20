@@ -44,38 +44,15 @@ namespace Hoplon {
         #region Methods
 
         public bool Add(string key, int subIndex, string value) {
-            //var s1 = Stopwatch.StartNew();
             MyObject newObj = new MyObject(key, subIndex, value);
             if (ObjectsList.Count == 0) {
-
                 ObjectsList.Add(newObj);
-
             } else {
-
                 //Caso seja chamado esta API com um valor que já foi mapeado para a chave e para algum subIndice, o valor antigo deve ser removido e o novo valor deve ser adicionado na posição correta considerando ordem crescente.
-                if (ObjectsList.Exists(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value)) {
-                    var indexToRemove = ObjectsList.FindIndex(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value);
-                    ObjectsList.RemoveAt(indexToRemove);
-                }
-                IComparer<MyObject> compare = new CompareObject();
-                int binarySearchIndex = ObjectsList.BinarySearch(newObj, (IComparer<MyObject>)compare);
-                if (binarySearchIndex < 0) {
-                    ObjectsList.Insert(~binarySearchIndex, newObj);
-                }
-
-                //ObjectsList.Add(myObj);
-                //List<MyObject> sortedList = ObjectsList.OrderBy(order => order.key)
-                //    .ThenBy(order => order.subIndex)
-                //    .ThenBy(order => order.value)
-                //    .ToList();
-                //ObjectsList.Clear();
-                //foreach (MyObject item in sortedList) {
-                //    ObjectsList.Add(item);
-                //}
-
+                RemoveRepeatedItem(newObj);
+                // Adiciona um elemento na coleção. Os elementos são armazenados na memória em ordem crescente.
+                AddSorted(newObj);
             }
-            //s1.Stop();
-            //Console.WriteLine(s1.Elapsed.TotalMilliseconds);
             return true;
         }
 
@@ -135,6 +112,21 @@ namespace Hoplon {
         #endregion
 
         #region Auxiliar Methods
+
+        private void RemoveRepeatedItem(MyObject newObj) {
+            if (ObjectsList.Exists(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value)) {
+                var indexToRemove = ObjectsList.FindIndex(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value);
+                ObjectsList.RemoveAt(indexToRemove);
+            }
+        }
+
+        private void AddSorted(MyObject newObj) {
+            IComparer<MyObject> compare = new CompareObject();
+            int binarySearchIndex = ObjectsList.BinarySearch(newObj, (IComparer<MyObject>)compare);
+            if (binarySearchIndex < 0) {
+                ObjectsList.Insert(~binarySearchIndex, newObj);
+            }
+        }
 
         public IList<string> List() {
             IList<string> resultList = new List<string>();

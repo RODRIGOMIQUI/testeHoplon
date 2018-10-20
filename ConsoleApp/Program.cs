@@ -79,6 +79,8 @@ namespace ConsoleApp {
             //collection.RemoveElement("chave");
             //Console.WriteLine(string.Concat("Total de itens: ", collection.totalItens.ToString()));
 
+            Console.ReadKey();
+
         }
     }
 }
