@@ -1,8 +1,8 @@
 .vs
 *.cache
-/ConsoleApp/bin/
-/ConsoleApp/obj/
-/Hoplon/bin/
-/Hoplon/obj/
-/UnitTest/bin/
-/UnitTest/obj/
+/Hoplon.ConsoleApp/bin/
+/Hoplon.ConsoleApp/obj/
+/Hoplon.Domain/bin/
+/Hoplon.Domain/obj/
+/Hoplon.UnitTest/bin/
+/Hoplon.UnitTest/obj/

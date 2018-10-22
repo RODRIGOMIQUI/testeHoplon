@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Hoplon\Hoplon.csproj" />
+    <ProjectReference Include="..\Hoplon.Domain\Hoplon.Domain.csproj" />
   </ItemGroup>
 
 </Project>

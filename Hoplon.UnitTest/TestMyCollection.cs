@@ -5,7 +5,20 @@ using System.Collections.Generic;
 namespace UnitTest {
 
     [TestClass]
-    public class UnitTest {
+    public class TestMyCollection {
+
+        [TestMethod]
+        public void AddSortedItemsFalse() {
+            MyCollection myCollectionActual = new MyCollection();
+            myCollectionActual.Add("classe", 0, "Rodrigo");
+            myCollectionActual.Add("classe", 0, "Anderson");
+
+            MyCollection myCollectionExpected = new MyCollection();
+            myCollectionExpected.Add("classe", 0, "Rodrigo");
+            myCollectionExpected.Add("classe", 0, "Anderson");
+
+            CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
+        }
 
         [TestMethod]
         public void AddSortedItemsTrue() {
@@ -21,23 +34,6 @@ namespace UnitTest {
             myCollectionExpected.Add("classe", 0, "Juliana");
             myCollectionExpected.Add("classe", 0, "Rodrigo");
 
-            CollectionAssert.AllItemsAreInstancesOfType(myCollectionActual.ObjectsList, typeof(MyCollection));
-            CollectionAssert.AllItemsAreInstancesOfType(myCollectionExpected.ObjectsList, typeof(MyCollection));
-            CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
-        }
-
-        [TestMethod]
-        public void AddSortedItemsFalse() {
-            MyCollection myCollectionActual = new MyCollection();
-            myCollectionActual.Add("classe", 0, "Rodrigo");
-            myCollectionActual.Add("classe", 0, "Anderson");
-
-            MyCollection myCollectionExpected = new MyCollection();
-            myCollectionExpected.Add("classe", 0, "Rodrigo");
-            myCollectionExpected.Add("classe", 0, "Anderson");
-
-            CollectionAssert.AllItemsAreInstancesOfType(myCollectionActual.ObjectsList, typeof(MyCollection));
-            CollectionAssert.AllItemsAreInstancesOfType(myCollectionExpected.ObjectsList, typeof(MyCollection));
             CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
         }
 
