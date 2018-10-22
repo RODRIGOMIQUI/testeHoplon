@@ -28,42 +28,13 @@ namespace Hoplon {
 
     public class MyObject : BaseObject {
 
-        #region Atributes
-
-        private string _key;
-        private int _subIndex;
-        private string _value;
-
-        #endregion
-
         #region Properties
 
-        public string key {
-            get {
-                return _key;
-            }
-            set {
-                _key = value;
-            }
-        }
+        public string key { get ; private set; }
 
-        public int subIndex {
-            get {
-                return _subIndex;
-            }
-            set {
-                _subIndex = value;
-            }
-        }
+        public int subIndex { get; private set; }
 
-        public string value {
-            get {
-                return _value;
-            }
-            set {
-                _value = value;
-            }
-        }
+        public string value { get; private set; }
 
         #endregion
 

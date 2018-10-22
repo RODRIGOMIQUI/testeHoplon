@@ -5,40 +5,29 @@ using System.Collections.Generic;
 namespace UnitTest {
 
     [TestClass]
-    public class TestMyCollection {
+    public class MyCollectionTest {
 
         [TestMethod]
-        public void AddSortedItemsFalse() {
-            MyCollection myCollectionActual = new MyCollection();
-            myCollectionActual.Add("classe", 0, "Rodrigo");
-            myCollectionActual.Add("classe", 0, "Anderson");
+        public void AddSortedItems() {
 
             MyCollection myCollectionExpected = new MyCollection();
-            myCollectionExpected.Add("classe", 0, "Rodrigo");
-            myCollectionExpected.Add("classe", 0, "Anderson");
-
-            CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
-        }
-
-        [TestMethod]
-        public void AddSortedItemsTrue() {
             MyCollection myCollectionActual = new MyCollection();
-            myCollectionActual.Add("classe", 0, "Rodrigo");
-            myCollectionActual.Add("classe", 0, "Anderson");
-            myCollectionActual.Add("classe", 0, "Juliana");
-            myCollectionActual.Add("assinaturas", 1, "Juliana");
 
-            MyCollection myCollectionExpected = new MyCollection();
             myCollectionExpected.Add("assinaturas", 1, "Juliana");
             myCollectionExpected.Add("classe", 0, "Anderson");
             myCollectionExpected.Add("classe", 0, "Juliana");
             myCollectionExpected.Add("classe", 0, "Rodrigo");
 
+            myCollectionActual.Add("classe", 0, "Rodrigo");
+            myCollectionActual.Add("classe", 0, "Anderson");
+            myCollectionActual.Add("classe", 0, "Juliana");
+            myCollectionActual.Add("assinaturas", 1, "Juliana");
+
             CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
         }
 
         [TestMethod]
-        public void RemoveRepeatedItemTrue() {
+        public void RemoveRepeatedItem() {
             MyCollection myCollectionActual = new MyCollection();
             myCollectionActual.Add("classe", 0, "Rodrigo");
             myCollectionActual.Add("classe", 0, "Rodrigo");
@@ -47,21 +36,6 @@ namespace UnitTest {
             myCollectionExpected.Add("classe", 0, "Rodrigo");
 
             CollectionAssert.AreEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
-            CollectionAssert.AllItemsAreUnique(myCollectionActual.ObjectsList);
-        }
-
-        [TestMethod]
-        public void RemoveRepeatedItemFalse() {
-            MyCollection myCollectionActual = new MyCollection();
-            myCollectionActual.Add("classe", 0, "Rodrigo");
-            myCollectionActual.Add("classe", 0, "Rodrigo");
-
-            MyCollection myCollectionExpected = new MyCollection();
-            myCollectionExpected.Add("classe", 0, "Rodrigo");
-            MyObject myObject = new MyObject("classe", 0, "Rodrigo");
-            myCollectionExpected.ObjectsList.Add(myObject);
-
-            CollectionAssert.AreNotEqual(myCollectionExpected.ObjectsList, myCollectionActual.ObjectsList);
             CollectionAssert.AllItemsAreUnique(myCollectionActual.ObjectsList);
         }
 

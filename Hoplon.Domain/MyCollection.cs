@@ -8,22 +8,9 @@ namespace Hoplon {
 
     public class MyCollection : IHoplonCollection {
 
-        #region Attributes
-                
-        private List<MyObject> _objectsList;
-
-        #endregion
-
         #region Properties
 
-        public List<MyObject> ObjectsList {
-            get {
-                return _objectsList;
-            }
-            set {
-                _objectsList = value;
-            }
-        }
+        public List<MyObject> ObjectsList { get; private set; }
 
         public int totalItens {
             get {
