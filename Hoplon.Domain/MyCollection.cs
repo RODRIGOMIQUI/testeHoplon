@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Hoplon {
@@ -31,16 +29,18 @@ namespace Hoplon {
         #region Methods
 
         public bool Add(string key, int subIndex, string value) {
+            bool objAdded = true;
             MyObject newObj = new MyObject(key, subIndex, value);
             if (ObjectsList.Count == 0) {
                 ObjectsList.Add(newObj);
             } else {
                 //Caso seja chamado esta API com um valor que já foi mapeado para a chave e para algum subIndice, o valor antigo deve ser removido e o novo valor deve ser adicionado na posição correta considerando ordem crescente.
-                RemoveRepeatedItem(newObj);
+                if (RemoveRepeatedItem(newObj))
+                    objAdded = false;
                 // Adiciona um elemento na coleção. Os elementos são armazenados na memória em ordem crescente.
                 AddSorted(newObj);
             }
-            return true;
+            return objAdded;
         }
 
         public IList<string> Get(string key, int start, int end) {
@@ -87,24 +87,35 @@ namespace Hoplon {
         }
 
         public bool RemoveElement(string key) {
-            ObjectsList.RemoveAll(e => e.key == key);
-            return true;
+            bool objFound = false;
+            if (ObjectsList.Exists(e => e.key == key)) {
+                ObjectsList.RemoveAll(e => e.key == key);
+                objFound = true;
+            }
+            return objFound;
         }
 
         public bool RemoveValuesFromSubIndex(string key, int subIndex) {
-            ObjectsList.RemoveAll(e => e.key == key && e.subIndex == subIndex);
-            return true;
+            bool objFound = false;
+            if (ObjectsList.Exists(e => e.key == key && e.subIndex == subIndex)) {
+                ObjectsList.RemoveAll(e => e.key == key && e.subIndex == subIndex);
+                objFound = true;
+            }
+            return objFound;
         }
 
         #endregion
 
         #region Auxiliar Methods
 
-        private void RemoveRepeatedItem(MyObject newObj) {
+        private bool RemoveRepeatedItem(MyObject newObj) {
+            bool objRepeated = false;
             if (ObjectsList.Exists(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value)) {
+                objRepeated = true;
                 var indexToRemove = ObjectsList.FindIndex(e => e.key == newObj.key && e.subIndex == newObj.subIndex && e.value == newObj.value);
                 ObjectsList.RemoveAt(indexToRemove);
             }
+            return objRepeated;
         }
 
         private void AddSorted(MyObject newObj) {

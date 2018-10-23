@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -41,6 +42,10 @@ namespace Hoplon {
         #region Constructors
 
         public MyObject(string key, int subIndex, string value) {
+
+            if (string.IsNullOrEmpty(key))
+                throw new ArgumentException("key cannot be invalid");
+
             this.key = key;
             this.subIndex = subIndex;
             this.value = value;
