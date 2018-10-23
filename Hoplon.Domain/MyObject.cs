@@ -45,6 +45,8 @@ namespace Hoplon {
 
             if (string.IsNullOrEmpty(key))
                 throw new ArgumentException("key cannot be invalid");
+            if (string.IsNullOrEmpty(value))
+                throw new ArgumentException("value cannot be invalid");
 
             this.key = key;
             this.subIndex = subIndex;
